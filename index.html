@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ryan Medeiros - Computer Science Graduate</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #e0e6ed;
+            background: linear-gradient(135deg, #0c1c2c 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 0;
+            color: white;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            background: linear-gradient(45deg, #00d4ff, #007cf0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: bold;
+            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.3);
+            animation: float 3s ease-in-out infinite;
+            border: 3px solid rgba(0, 212, 255, 0.2);
+            overflow: hidden;
+        }
+
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            background: linear-gradient(135deg, #00d4ff, #007cf0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            color: #a0aec0;
+        }
+
+        .main-content {
+            background: rgba(26, 32, 54, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin-top: -50px;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav {
+            background: rgba(15, 23, 42, 0.95);
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-item {
+            color: #e0e6ed;
+            text-decoration: none;
+            padding: 20px 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-item:hover {
+            background: linear-gradient(135deg, #00d4ff, #007cf0);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-item:hover::before {
+            left: 100%;
+        }
+
+        .section {
+            padding: 60px 40px;
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+            background: linear-gradient(135deg, #00d4ff, #007cf0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 2rem !important;
+            margin-bottom: 20px !important;
+            text-align: left !important;
+            background: linear-gradient(135deg, #00d4ff, #007cf0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .personal-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .about-image {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, #00d4ff, #007cf0);
+            border-radius: 15px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.2);
+            overflow: hidden;
+        }
+
+        .professional-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #cbd5e0;
+        }
+
+        .education-info {
+            background: rgba(15, 23, 42, 0.5);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #00d4ff;
+            margin-top: 20px;
+        }
+
+        .education-info h3 {
+            color: #00d4ff;
+            margin-bottom: 10px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .skill-category {
+            margin-bottom: 30px;
+        }
+
+        .skill-category h3 {
+            color: #00d4ff;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .skill-item {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 124, 240, 0.1));
+            color: #e0e6ed;
+            padding: 15px 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 500;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.2);
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(0, 124, 240, 0.2));
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .project-card {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
+            border-color: #00d4ff;
+        }
+
+        .project-card h3 {
+            color: #00d4ff;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .project-card p {
+            color: #cbd5e0;
+            margin-bottom: 15px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .tech-tag {
+            background: rgba(0, 212, 255, 0.1);
+            color: #00d4ff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .contact-info {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-info p {
+            color: #cbd5e0;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #00d4ff, #007cf0);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .contact-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4);
+            background: linear-gradient(135deg, #007cf0, #00d4ff);
+        }
+
+        .work-experience {
+            background: rgba(15, 23, 42, 0.5);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #007cf0;
+            margin-top: 20px;
+        }
+
+        .work-experience h3 {
+            color: #007cf0;
+            margin-bottom: 5px;
+        }
+
+        .work-period {
+            color: #a0aec0;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .work-experience ul {
+            color: #cbd5e0;
+            padding-left: 20px;
+        }
+
+        .work-experience li {
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .about-main-grid { grid-template-columns: 1fr; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .nav { flex-direction: column; }
+            .section { padding: 40px 20px; }
+            .contact-links { flex-direction: column; align-items: center; }
+            .skills-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+        }
+
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.03;
+            animation: float-shape 8s ease-in-out infinite;
+            color: #00d4ff;
+            font-size: 40px;
+        }
+
+        .shape:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            top: 60%;
+            right: 10%;
+            animation-delay: 3s;
+        }
+
+        .shape:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 6s;
+        }
+
+        @keyframes float-shape {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-shapes">
+        <div class="shape">⟨/⟩</div>
+        <div class="shape">{ }</div>
+        <div class="shape">≡</div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="profile-img">
+                <img src="media/ProfileImage.jpg" alt="Ryan Medeiros" onerror="this.style.display='none'; this.parentElement.innerHTML='RM';">
+            </div>
+            <h1>Ryan Medeiros</h1>
+            <p class="tagline">Bachelors in Computer Science | Cybersecurity & IT | Software Engineer</p>
+        </header>
+
+        <div class="main-content">
+            <nav class="nav">
+                <a href="#" class="nav-item" onclick="showSection('about')">About</a>
+                <a href="#" class="nav-item" onclick="showSection('skills')">Skills</a>
+                <a href="#" class="nav-item" onclick="showSection('projects')">Projects</a>
+                <a href="#" class="nav-item" onclick="showSection('contact')">Contact</a>
+            </nav>
+
+            <div id="about" class="section active">
+                <div class="about-main-grid">
+                    <div class="personal-section">
+                        <h2 class="section-subtitle">About Me</h2>
+                        <div class="about-image">
+                            <img src="media/ProfileImage.jpg" alt="Ryan Medeiros" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;" onerror="this.style.display='none'; this.parentElement.innerHTML='Photo Here';">
+                        </div>
+                        <div class="about-text">
+                            <p>Hello! I'm Ryan Medeiros, a passionate Computer Science graduate from UMass Dartmouth with a specialized concentration in Cybersecurity. Growing up as a Portuguese American in the Fall River, MA area, I'm proud to be a first-generation college graduate and I'm fluent in both Portuguese and English.</p>
+                            
+                            <p>My journey into technology began at Diman Regional Vocational Technical High School, where I graduated from the Programming and Web Development program. This early exposure to coding sparked my passion for computer science and set me on the path that led to earning my Bachelor's degree from UMass Dartmouth.</p>
+                            
+                            <p>When I'm not coding or working, you'll find me pursuing my other passions. I'm an avid PC gamer and enjoy building custom computers, working on cars, hiking and exploring new places, working with Legos, and diving into new coding projects just for fun. My diverse interests have taught me to approach problems from multiple angles, whether I'm debugging code, troubleshooting a car engine, or planning the perfect PC build.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="professional-section">
+                        <h2 class="section-subtitle">Experience</h2>
+                        <div class="education-info">
+                            <h3>Education</h3>
+                            <p><strong>University of Massachusetts Dartmouth</strong> - May 2025</p>
+                            <p>Bachelor of Science in Computer Science</p>
+                            <p>Cybersecurity Concentration | ABET Accredited Program</p>
+                        </div>
+
+                        <div class="work-experience">
+                            <h3>Rite-Solutions | Software Development Contractor</h3>
+                            <p class="work-period">September 2024 – April 2025</p>
+                            <ul>
+                                <li>Collaborated with a development team to create a secure, offline AI content generation application</li>
+                                <li>Architected a completely air-gapped system using open-source technologies</li>
+                                <li>Containerized the entire application using Docker for deployment and scalability</li>
+                                <li>Implemented dual-LLM architecture utilizing Phi-4 and LLAMA3.1</li>
+                                <li>Developed Python/LangChain backend with RAG for context-aware responses</li>
+                                <li>Built React frontend with full CRUD operations for Milvus database management</li>
+                                <li>Successfully delivered MVP in December 2024 and final product in April 2025</li>
+                            </ul>
+                        </div>
+
+                        <div class="work-experience">
+                            <h3>Stop & Shop | Customer Service Supervisor</h3>
+                            <p class="work-period">May 2021 – Present</p>
+                            <ul>
+                                <li>Lead a front-end team of 10 employees, ensuring efficiency and excellent customer service</li>
+                                <li>Resolved escalated customer issues and streamlined troubleshooting processes</li>
+                                <li>Applied technical troubleshooting with store systems and POS tools</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="skills" class="section">
+                <h2>Technical Skills</h2>
+                
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">Python</div>
+                        <div class="skill-item">Java</div>
+                        <div class="skill-item">C</div>
+                        <div class="skill-item">C#</div>
+                        <div class="skill-item">JavaScript</div>
+                        <div class="skill-item">SQL</div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Web Development</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">HTML5</div>
+                        <div class="skill-item">CSS3</div>
+                        <div class="skill-item">React</div>
+                        <div class="skill-item">Node.js</div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Tools & Technologies</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">Git</div>
+                        <div class="skill-item">GitHub</div>
+                        <div class="skill-item">Docker</div>
+                        <div class="skill-item">Linux</div>
+                        <div class="skill-item">Windows</div>
+                        <div class="skill-item">Milvus</div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Cybersecurity</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">RSA Encryption</div>
+                        <div class="skill-item">AES Encryption</div>
+                        <div class="skill-item">Network Security</div>
+                        <div class="skill-item">Digital Forensics</div>
+                        <div class="skill-item">Cryptographic Protocols</div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>IT & Problem Solving</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">Debugging Code</div>
+                        <div class="skill-item">Software Troubleshooting</div>
+                        <div class="skill-item">Network Fundamentals</div>
+                        <div class="skill-item">System Administration</div>
+                        <div class="skill-item">Technical Support</div>
+                        <div class="skill-item">POS Systems</div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Methodologies</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">Agile</div>
+                        <div class="skill-item">Scrum</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="projects" class="section">
+                <h2>Featured Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h3>AI Content Generation Platform</h3>
+                        <p>Prototyped an intelligent content creation web application utilizing advanced AI technologies. Integrated vector-based document retrieval using Retrieval Augmented Generation (RAG) to improve content relevance and accuracy. Developed a user-friendly React frontend with full CRUD operations for vector database management.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">LangChain</span>
+                            <span class="tech-tag">RAG</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Vector Database</span>
+                            <span class="tech-tag">Scrum</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>Secure Chat Simulator</h3>
+                        <p>Developed a comprehensive desktop application simulating secure two-user communication using hybrid RSA and AES encryption. Built sophisticated attacker modules to simulate confidentiality, integrity, and availability threats. Implemented an intuitive Tkinter GUI with detailed logging for forensic tracking of security attacks.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">RSA Encryption</span>
+                            <span class="tech-tag">AES Encryption</span>
+                            <span class="tech-tag">Tkinter</span>
+                            <span class="tech-tag">Digital Forensics</span>
+                            <span class="tech-tag">Cybersecurity</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>AntiPhish Email Security Tool</h3>
+                        <p>Python-based cybersecurity tool that analyzes .eml email files to detect phishing characteristics. Features risk scoring system that evaluates suspicious content, link mismatches, domain patterns, and IP-based URLs. Includes Tkinter GUI for file selection and detailed breakdown of detected threats.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">BeautifulSoup</span>
+                            <span class="tech-tag">Tkinter</span>
+                            <span class="tech-tag">Email Analysis</span>
+                            <span class="tech-tag">Cybersecurity</span>
+                            <span class="tech-tag">TLD Extract</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>ByteLock File Encryption Tool</h3>
+                        <p>Secure command-line file encryption and decryption tool written in C#. Provides AES-256 encryption with SHA256 checksums for file integrity verification. Features clean CLI interface and supports any file type, designed for personal data protection and cybersecurity applications.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">C#</span>
+                            <span class="tech-tag">.NET</span>
+                            <span class="tech-tag">AES-256</span>
+                            <span class="tech-tag">SHA256</span>
+                            <span class="tech-tag">Cryptography</span>
+                            <span class="tech-tag">CLI</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>Gas Saver Mobile App</h3>
+                        <p>React Native mobile application for tracking fuel efficiency and trip history. Features MPG calculations, trip management with local storage, and planned integration with OBD-II devices. Built with Expo for cross-platform deployment on iOS and Android.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">Expo</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Local Storage</span>
+                            <span class="tech-tag">Mobile Development</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <h3>AutoTrackr Vehicle Maintenance</h3>
+                        <p>Local Python application for tracking vehicle maintenance records with both CLI and modern GUI interfaces. Features vehicle management, maintenance logging with cost tracking, and scrollable history display. Built with CustomTkinter for enhanced user experience.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">CustomTkinter</span>
+                            <span class="tech-tag">JSON</span>
+                            <span class="tech-tag">GUI Development</span>
+                            <span class="tech-tag">Data Management</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="contact" class="section">
+                <h2>Get In Touch</h2>
+                <div class="contact-info">
+                    <p>I'm actively seeking opportunities to start my career in software development and cybersecurity. With a strong foundation in both secure application development and modern web technologies, I'm excited to contribute to innovative projects and continue growing in the tech industry.</p>
+                    
+                    <div class="contact-links">
+                        <a href="mailto:rfmedeiros11@gmail.com" class="contact-link">Email Me</a>
+                        <a href="https://www.linkedin.com/in/ryanfmedeiros/" class="contact-link" target="_blank">LinkedIn</a>
+                        <a href="https://github.com/ryanfmedeiros" class="contact-link" target="_blank">GitHub</a>
+                    </div>
+                    
+                    <p style="margin-top: 30px; color: #a0aec0;">
+                        📍 Somerset, MA
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show the selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update active nav item
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.style.background = '';
+                item.style.color = '#e0e6ed';
+            });
+            
+            // Find and highlight the clicked nav item
+            const clickedItem = event.target;
+            clickedItem.style.background = 'linear-gradient(135deg, #00d4ff, #007cf0)';
+            clickedItem.style.color = 'white';
+        }
+
+        // Add some interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial active nav item
+            const aboutNavItem = document.querySelector('.nav-item');
+            aboutNavItem.style.background = 'linear-gradient(135deg, #00d4ff, #007cf0)';
+            aboutNavItem.style.color = 'white';
+
+            // Add smooth scrolling to nav items
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                });
+            });
+
+            // Add enhanced hover effects to project cards
+            const projectCards = document.querySelectorAll('.project-card');
+            projectCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-12px) scale(1.02)';
+                    this.style.boxShadow = '0 25px 50px rgba(0, 212, 255, 0.15)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                    this.style.boxShadow = '0 20px 40px rgba(0, 212, 255, 0.1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
